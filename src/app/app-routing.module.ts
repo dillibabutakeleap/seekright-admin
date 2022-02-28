@@ -9,6 +9,15 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./components/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
+    ],
   },
   {
     path: '',
@@ -19,7 +28,7 @@ const routes: Routes = [
           import('./components/ui/auth/auth.module').then((m) => m.AuthModule),
       },
     ],
-  },
+  }
 ];
 
 @NgModule({

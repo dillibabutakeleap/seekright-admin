@@ -1,4 +1,5 @@
-<a href="javascript:void(0)" [routerLink]="item.link" routerLinkActive="active" class="menu-row text-decoration-none">
+<a href="javascript:void(0)" [routerLink]="item.link" routerLinkActive="active"
+  [routerLinkActiveOptions]="{exact: true}" class="menu-row text-decoration-none">
   <div class="icon">
     <mat-icon [svgIcon]="item.icon"></mat-icon>
   </div>

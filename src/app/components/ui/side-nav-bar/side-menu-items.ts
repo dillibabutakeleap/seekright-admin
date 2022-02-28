@@ -20,7 +20,8 @@ export const sideMenu: MenuItem[] = [
   {
     title: 'All Users',
     type: 'basic',
-    icon: 'heroicons_outline:users'
+    icon: 'heroicons_outline:users',
+    link:'/users'
   },
   
 ];

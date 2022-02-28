@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_endpoint: 'http://3.108.55.96:3011',
+  // api_endpoint: 'http://3.108.55.96:3011',
+  api_endpoint: 'http://localhost:3011',
 };
 
 /*

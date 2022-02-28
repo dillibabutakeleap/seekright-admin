@@ -1,0 +1,100 @@
+<div class="card col-12">
+
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="dataForm" #stepper>
+            <form [formGroup]="dataForm">
+                <ng-template matStepLabel>User and Organization</ng-template>
+                <div class="row">
+                    <mat-form-field class="col-12 col-sm-6 col-md-4" class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Enter user name" formControlName="name" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" placeholder="Email" formControlName="email" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Organization Name</mat-label>
+                        <input matInput type="text" placeholder="Enter Organization Name" formControlName="org_name"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>DataBase Name</mat-label>
+                        <input matInput type="text" placeholder="Enter Database Name" formControlName="db_name"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Enter password" type="password" formControlName="password"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput placeholder="Enter Confirm password" type="password"
+                            formControlName="confirmPassword" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <small class="text-danger">{{errorText}}</small>
+                    <button mat-button (click)="onUserRegisterClick()" [disabled]="dataForm.invalid">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="siteForm" label="Site">
+            <form [formGroup]="siteForm">
+                <ng-template matStepLabel>User and Organization</ng-template>
+                <div class="row">
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Site Name</mat-label>
+                        <input matInput placeholder="Enter Sitge name" formControlName="site_name" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Select Direction</mat-label>
+                        <mat-select formControlName="direction">
+                            <mat-option *ngFor="let direction of directions" [value]="direction.direction_id">
+                                {{direction.direction_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Start Chainage</mat-label>
+                        <input matInput type="number" placeholder="Enter Start Chainage" step="0.01"
+                            formControlName="start_chinage" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>End Chainage</mat-label>
+                        <input matInput type="number" placeholder="Enter End chainage" step="0.01"
+                            formControlName="end_chinage" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Total Km</mat-label>
+                        <input matInput placeholder="Enter total Kms" type="number" step="0.01"
+                            formControlName="total_km" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-12 col-sm-6 col-md-4">
+                        <mat-label>Site Value</mat-label>
+                        <input matInput placeholder="Enter Site Value" type="number" step="0.01"
+                            formControlName="site_value" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <p>{{errorText}}</p>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext [disabled]="siteForm.invalid"
+                        (click)="onSiteAddClick()">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button [routerLink]="['../']">Done</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+
+
+</div>
