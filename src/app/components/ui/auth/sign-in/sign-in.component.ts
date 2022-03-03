@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
         (res: any) => {
           console.log(res);
           let user=res.responseData[0].records[0]
-          this.storageService.set('seekright-admin-loggedInUser', JSON.stringify(user));
+          this.storageService.set('seekright-admin-loggedInUser', user);
           this.alertService.success('Login Successful.');
           this.router.navigate(['/users']);
         },

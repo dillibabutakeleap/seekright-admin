@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { AlertService } from '@full-fledged/alerts';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -17,24 +19,27 @@ export class UsersComponent implements OnInit {
   totalRecords = 0;
   constructor(
     private dashboardService: DashboardService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
     this.getUsers();
   }
   getUsers() {
-    this.dashboardService.getUsers(this.search).subscribe(
-      (res: any) => {
-        this.users = res.data;
-        this.totalRecords = res.count;
-        console.log(this.users)
-      },
-      (error) => {
-        console.error(error);
-        this.alertService.danger(error.message);
-      }
-    );
+    this.spinner.show();
+    this.dashboardService
+      .getUsers(this.search).subscribe(
+        (res: any) => {
+          this.users = res.data;
+          this.totalRecords = res.count;
+          console.log(this.users);
+        },
+        (error) => {
+          console.error(error);
+          this.alertService.danger(error.message);
+        }
+      );
   }
 
   onPageChange(ev: PageEvent) {

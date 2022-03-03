@@ -44,7 +44,7 @@ export class SignUpComponent implements OnInit {
     this.authService.register(this.dataForm.value).subscribe(
       (res: any) => {
         this.successMsg = res.message;
-        localStorage.setItem('seekright-admin-loggedInUser', JSON.stringify(res.user));
+        this.storageService.set('seekright-admin-loggedInUser', res.user);
         // this.alertService.success(res.message);
         setTimeout(() => this.router.navigate(['/']), 1000);
       },

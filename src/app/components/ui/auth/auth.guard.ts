@@ -5,27 +5,30 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
+import { AlertService } from '@full-fledged/alerts';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private router: Router // private alertService: AlertService
+    private router: Router,
+    @Inject(LOCAL_STORAGE) private storage: StorageService,
+    private alertService: AlertService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let loggedInUser = localStorage.getItem('seekright-admin-loggedInUser');
-    if (loggedInUser) {
-      loggedInUser = JSON.parse(loggedInUser);  
-    }
-    console.log(loggedInUser['user_roles']);
-    if (
-      !loggedInUser 
-      // ||
-      // (loggedInUser && loggedInUser['user_roles'].includes('ADMIN'))
-    ) {
-      //   this.alertService.error(
-      //     'UnAuthorized Please login before accessing the route'
-      //   );
+    const loggedInUser = this.storage.get('seekright-admin-loggedInUser');
+    if (!loggedInUser) {
+      this.alertService.danger(
+        'UnAuthorized Please login before accessing the route'
+      );
+      localStorage.clear();
+      this.router.navigate(['/login']);
+      return false;
+    }else if( (loggedInUser && !loggedInUser['user_roles'].includes('ADMIN'))){
+      this.alertService.danger(
+        'You are not allowed to use this website'
+      );
       localStorage.clear();
       this.router.navigate(['/login']);
       return false;
