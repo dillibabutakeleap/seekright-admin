@@ -13,7 +13,16 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!localStorage.getItem('seekright-admin-loggedInUser')) {
+    let loggedInUser = localStorage.getItem('seekright-admin-loggedInUser');
+    if (loggedInUser) {
+      loggedInUser = JSON.parse(loggedInUser);  
+    }
+    console.log(loggedInUser['user_roles']);
+    if (
+      !loggedInUser 
+      // ||
+      // (loggedInUser && loggedInUser['user_roles'].includes('ADMIN'))
+    ) {
       //   this.alertService.error(
       //     'UnAuthorized Please login before accessing the route'
       //   );

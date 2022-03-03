@@ -1,5 +1,5 @@
 <div class="header  d-flex align-items-center px-3" id="header">
-  <mat-icon aria-hidden="false" class="text-dark pointer" aria-label="Example home icon" (click)="onMenuClick()">menu
+  <mat-icon aria-hidden="false" [svgIcon]="'mat_outline:menu'" class="text-dark pointer" aria-label="Example home icon" (click)="onMenuClick()">
   </mat-icon>
   <div class="me-2 ms-auto">
     <div mat-button [matMenuTriggerFor]="menu">
