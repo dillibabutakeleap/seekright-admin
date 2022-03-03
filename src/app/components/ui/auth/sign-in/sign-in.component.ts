@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
   }
   buildDataForm() {
     this.dataForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
@@ -42,7 +42,8 @@ export class SignInComponent implements OnInit {
       this.authService.login(payload).subscribe(
         (res: any) => {
           console.log(res);
-          this.storageService.set('seekright-admin-loggedInUser', res.user);
+          let user=res.responseData[0].records[0]
+          this.storageService.set('seekright-admin-loggedInUser', JSON.stringify(user));
           this.alertService.success('Login Successful.');
           this.router.navigate(['/']);
         },

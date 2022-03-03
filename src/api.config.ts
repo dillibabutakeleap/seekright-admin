@@ -1,6 +1,6 @@
 export const apiConfig = {
   auth: {
-    login: '/login',
+    login: '/Master/login',
     register: '/register',
     logout: '/logout',
   },

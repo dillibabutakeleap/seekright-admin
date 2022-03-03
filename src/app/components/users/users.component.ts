@@ -26,8 +26,9 @@ export class UsersComponent implements OnInit {
   getUsers() {
     this.dashboardService.getUsers(this.search).subscribe(
       (res: any) => {
-        this.users = res.users;
-        this.totalRecords = res.totalRecords;
+        this.users = res.data;
+        this.totalRecords = res.count;
+        console.log(this.users)
       },
       (error) => {
         console.error(error);
